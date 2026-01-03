@@ -90,7 +90,7 @@ export async function retry<T>(
     }
   }
   
-  throw lastError || new Error('Retry failed');
+  throw lastError || new Error(`Operation failed after ${maxAttempts} attempts`);
 }
 
 /**
