@@ -1,6 +1,7 @@
 import { test as base } from '@playwright/test';
 import { LoginPage } from '../pages/loginPage';
 import { DashboardPage } from '../pages/dashboardPage';
+import { SmartestQAPage } from '../pages/smartestQAPage';
 
 /**
  * Custom fixtures that extend the base Playwright test
@@ -9,6 +10,7 @@ import { DashboardPage } from '../pages/dashboardPage';
 type TestFixtures = {
   loginPage: LoginPage;
   dashboardPage: DashboardPage;
+  smartestQAPage: SmartestQAPage;
 };
 
 /**
@@ -31,6 +33,15 @@ export const test = base.extend<TestFixtures>({
   dashboardPage: async ({ page }, use) => {
     const dashboardPage = new DashboardPage(page);
     await use(dashboardPage);
+  },
+
+  /**
+   * Smartest QA page fixture - automatically creates a SmartestQAPage instance
+   * Usage: async ({ smartestQAPage }) => { ... }
+   */
+  smartestQAPage: async ({ page }, use) => {
+    const smartestQAPage = new SmartestQAPage(page);
+    await use(smartestQAPage);
   },
 });
 
