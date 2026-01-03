@@ -1,10 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
+import * as dotenv from 'dotenv';
 
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// require('dotenv').config();
+dotenv.config();
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -36,9 +37,9 @@ export default defineConfig({
     /* Video on failure */
     video: 'retain-on-failure',
     /* Maximum time each action such as `click()` can take */
-    actionTimeout: 10000,
+    actionTimeout: parseInt(process.env.ACTION_TIMEOUT || '10000'),
     /* Maximum navigation time */
-    navigationTimeout: 30000,
+    navigationTimeout: parseInt(process.env.NAVIGATION_TIMEOUT || '30000'),
   },
 
   /* Configure projects for major browsers */
