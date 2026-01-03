@@ -37,6 +37,12 @@ jobs:
       run: npm test -- --project=${{ matrix.browser }}
       env:
         CI: true
+        BASE_URL: ${{ secrets.BASE_URL || 'https://example.com' }}
+        LOGIN_URL: ${{ secrets.LOGIN_URL || '/login' }}
+        DASHBOARD_URL: ${{ secrets.DASHBOARD_URL || '/dashboard' }}
+        TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+        TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+        TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
 
     - name: Upload test results
       uses: actions/upload-artifact@v4
@@ -78,6 +84,12 @@ jobs:
       run: npm test
       env:
         CI: true
+        BASE_URL: ${{ secrets.BASE_URL || 'https://example.com' }}
+        LOGIN_URL: ${{ secrets.LOGIN_URL || '/login' }}
+        DASHBOARD_URL: ${{ secrets.DASHBOARD_URL || '/dashboard' }}
+        TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+        TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+        TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
 
     - name: Upload HTML report
       uses: actions/upload-artifact@v4

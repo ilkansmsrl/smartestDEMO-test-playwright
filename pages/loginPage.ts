@@ -7,9 +7,9 @@ import { BasePage } from './basePage';
  */
 export class LoginPage extends BasePage {
   // Selectors
-  private readonly usernameInput: string = '#username';
+  private readonly emailInput: string = '#email';
   private readonly passwordInput: string = '#password';
-  private readonly loginButton: string = 'button[type="submit"]';
+  private readonly loginButton: string = '#login-btn';
   private readonly errorMessage: string = '.error-message';
   private readonly successMessage: string = '.success-message';
 
@@ -25,10 +25,10 @@ export class LoginPage extends BasePage {
   }
 
   /**
-   * Get username input field
+   * Get email input field
    */
-  getUsernameInput(): Locator {
-    return this.getElement(this.usernameInput);
+  getEmailInput(): Locator {
+    return this.getElement(this.emailInput);
   }
 
   /**
@@ -46,10 +46,10 @@ export class LoginPage extends BasePage {
   }
 
   /**
-   * Fill username
+   * Fill email
    */
-  async fillUsername(username: string) {
-    await this.fill(this.usernameInput, username);
+  async fillEmail(email: string) {
+    await this.fill(this.emailInput, email);
   }
 
   /**
@@ -69,8 +69,8 @@ export class LoginPage extends BasePage {
   /**
    * Perform complete login action
    */
-  async login(username: string, password: string) {
-    await this.fillUsername(username);
+  async login(email: string, password: string) {
+    await this.fillEmail(email);
     await this.fillPassword(password);
     await this.clickLogin();
   }
