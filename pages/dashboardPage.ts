@@ -94,4 +94,68 @@ export class DashboardPage extends BasePage {
   async isLogoutButtonVisible(): Promise<boolean> {
     return await this.isVisible(this.logoutButton);
   }
+
+  /**
+   * Get all menu items (for backward compatibility)
+   */
+  getMenuItems(): Locator {
+    return this.getElement(this.menuItems);
+  }
+
+  /**
+   * Check if user menu is visible (for backward compatibility)
+   * Uses sidebar menu as fallback
+   */
+  async isUserMenuVisible(): Promise<boolean> {
+    return await this.isSidebarMenuVisible();
+  }
+
+  /**
+   * Open user menu (for backward compatibility)
+   * Uses sidebar menu as fallback
+   */
+  async openUserMenu() {
+    // For backward compatibility, do nothing or could click sidebar
+  }
+
+  /**
+   * Check if data table is visible
+   */
+  async isDataTableVisible(): Promise<boolean> {
+    const dataTable = 'table, .data-table, [data-testid="data-table"]';
+    return await this.isVisible(dataTable);
+  }
+
+  /**
+   * Get table row count
+   */
+  async getTableRowCount(): Promise<number> {
+    const dataTable = 'table, .data-table, [data-testid="data-table"]';
+    return await this.page.locator(`${dataTable} tbody tr`).count();
+  }
+
+  /**
+   * Search for data
+   */
+  async search(query: string) {
+    const searchInput = 'input[type="search"], input[placeholder*="Search"], input[placeholder*="search"]';
+    await this.fill(searchInput, query);
+    // Wait a bit for search to process
+    await this.page.waitForTimeout(500);
+  }
+
+  /**
+   * Check if specific element exists on dashboard
+   */
+  async hasElement(selector: string): Promise<boolean> {
+    return await this.page.locator(selector).count() > 0;
+  }
+
+  /**
+   * Check if loader is visible
+   */
+  async isLoaderVisible(): Promise<boolean> {
+    const loader = '.loader, .spinner, .loading, [data-testid="loader"]';
+    return await this.isVisible(loader);
+  }
 }
