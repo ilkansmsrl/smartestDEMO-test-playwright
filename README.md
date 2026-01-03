@@ -7,6 +7,7 @@ Smartest test ortamının test edilmesi için Playwright tabanlı end-to-end (e2
 - [Özellikler](#özellikler)
 - [Gereksinimler](#gereksinimler)
 - [Kurulum](#kurulum)
+- [Test Kurulum Rehberi](#test-kurulum-rehberi)
 - [Proje Yapısı](#proje-yapısı)
 - [Test Çalıştırma](#test-çalıştırma)
 - [Konfigürasyon](#konfigürasyon)
@@ -65,6 +66,24 @@ cp .env.example .env
 # .env dosyasını düzenleyin
 ```
 
+## 📚 Test Kurulum Rehberi
+
+**ÖNEMLİ:** Login, dashboard ve logout test senaryolarını çalıştırmak için detaylı kurulum talimatları:
+
+👉 **[TEST_SETUP.md](TEST_SETUP.md)** dosyasına bakın
+
+Bu rehber şunları içerir:
+- GitHub Secrets yapılandırması (CI/CD için)
+- Lokal test ortamı kurulumu
+- Test senaryoları detayları
+- Element selector'lar
+- Troubleshooting
+
+**Kısa özet:**
+- GitHub Secrets'a `TEST_EMAIL`, `TEST_PASSWORD`, `BASE_URL` gibi değişkenleri ekleyin
+- Lokal testler için `.env` dosyası oluşturun ve düzenleyin
+- `tests/auth-flow.spec.ts` dosyasında tüm authentication testleri bulunur
+
 ## 📁 Proje Yapısı
 
 ```
@@ -73,11 +92,14 @@ smartestDEMO-test-playwright/
 │   └── workflows/
 │       └── playwright.yml          # GitHub Actions CI/CD pipeline
 ├── tests/
+│   ├── auth-flow.spec.ts           # Login, dashboard ve logout test senaryoları
 │   ├── example.spec.ts             # Örnek test senaryoları
+│   ├── dashboard.spec.ts           # Dashboard test senaryoları
 │   └── login.spec.ts               # Login test senaryoları
 ├── pages/
 │   ├── basePage.ts                 # Base page class (ortak metodlar)
-│   └── loginPage.ts                # Login page object
+│   ├── loginPage.ts                # Login page object
+│   └── dashboardPage.ts            # Dashboard page object
 ├── fixtures/
 │   └── testFixtures.ts             # Test fixtures
 ├── utils/
@@ -87,6 +109,7 @@ smartestDEMO-test-playwright/
 ├── package.json                    # Node.js dependencies
 ├── .gitignore                      # Git ignore kuralları
 ├── .env.example                    # Örnek environment variables
+├── TEST_SETUP.md                   # Test kurulum ve yapılandırma rehberi
 └── README.md                       # Proje dokümantasyonu
 ```
 
